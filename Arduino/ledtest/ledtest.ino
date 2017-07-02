@@ -69,23 +69,26 @@ void setup() {
 
 
 // Periods in msecs
-float rperiod = 5000;
-float gperiod = 7000;
-float bperiod = 9000;
+float baseperiod = 3;
+float rperiod = baseperiod;
+float gperiod = baseperiod + 2;
+float bperiod = baseperiod + 3;
 float rspacing = 30;
 float gspacing = 30;
 float bspacing = 30;
 float pi = 3.14159;
+int offset = 3;
 
 void loop() {
-    int r = 63 + 63 * cos(2 * pi * (millis() / rperiod ));
-    int g = 63 + 63 * cos(2 * pi * (millis() / gperiod ));
-    int b = 63 + 63 * cos(2 * pi * (millis() / bperiod ));
-    
-  for (int index = 0; index < strip.numPixels()-1; index++) {
-    strip.setPixelColor(index, strip.getPixelColor(index+1));
+  int r = 63 + 63 * cos(2 * pi * (millis() / rperiod / 1000 ));
+  int g = 63 + 63 * cos(2 * pi * (millis() / gperiod / 1000 ));
+  int b = 63 + 63 * cos(2 * pi * (millis() / bperiod / 1000 ));
+
+  for (int index = 0; index < strip.numPixels() - offset; index++) {
+    strip.setPixelColor(index, strip.getPixelColor(index + offset));
   }
-  strip.setPixelColor(strip.numPixels()-1,strip.Color(r,g,b));
+  for (int index = 1; index <= offset; index++)
+    strip.setPixelColor(strip.numPixels() - offset, strip.Color(r, g, b));
   //delay(100);
   strip.show();
 }
