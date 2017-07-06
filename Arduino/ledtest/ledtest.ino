@@ -9,6 +9,10 @@ LPD8806multi strip = LPD8806multi();
 void setup() {
   int i;
 
+
+  // Setup serial port
+  Serial.begin(115200);
+  
   strip.init();
   // Update the strip, to start they are all 'off'
   strip.show();
@@ -16,9 +20,6 @@ void setup() {
   strip.setPixelColor(0, strip.Color(0, 127, 0));
   strip.show();
 
-
-  // Setup serial port
-  Serial.begin(115200);
 
   if (1) {
     // If using external memory, adjust heap end up
@@ -65,6 +66,9 @@ void setup() {
   Serial.print("Have ");
   Serial.print((int)strip.numPixels());
   Serial.println(" leds");
+  //for (int index=0;index<strip.numPixels();index++) {
+  //  strip.setPixelColor(index, strip.Color(index%128,(index*3)%128, (index*7)%128));
+  //}
 }
 
 
@@ -77,7 +81,9 @@ float rspacing = 30;
 float gspacing = 30;
 float bspacing = 30;
 float pi = 3.14159;
-int offset = 3;
+int offset = 1;
+long int lastmilli=0;
+int count=0;
 
 void loop() {
   int r = 63 + 63 * cos(2 * pi * (millis() / rperiod / 1000 ));
@@ -91,4 +97,10 @@ void loop() {
     strip.setPixelColor(strip.numPixels() - offset, strip.Color(r, g, b));
   //delay(100);
   strip.show();
+  if (count>30) {
+  Serial.println((millis()-lastmilli)*1.0/count);
+  count=0;
+  lastmilli=millis();
+  }
+  count++;
 }
