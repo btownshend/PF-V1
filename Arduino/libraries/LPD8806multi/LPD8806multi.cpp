@@ -4,7 +4,7 @@
 // Arduino library to control LPD8806multi-based RGB LED Strips
 // (c) Adafruit industries
 // MIT license
-#define NSTRIPS 7
+#define NSTRIPS 8
 static const int nstrips=NSTRIPS;
 
 #if NSTRIPS==8
@@ -13,7 +13,9 @@ static const int nports=3;
 static const uint8_t datapins[nstrips]={49,47,45,43,37,35,33,41};
 static const uint8_t clkpins[nstrips]= {48,46,44,42,36,34,32,40};
 static const uint8_t ports[nstrips]={0,0,0,0,1,1,1,2};
-TODO -- havent fully modified code to support 8 strips
+static const uint8_t clkpinmaskperport[nports] = {0xaa,0x2a,0x02};
+static const uint8_t datapinmaskperport[nports]={0x55,0x1f,0x01};
+static const uint8_t datapinmask[nstrips]={0x1,0x4,0x10,0x40,0x1,0x4,0x10,0x1};
 #else
 static const int nports=2;
 // Masks for direct control of pins
@@ -102,6 +104,10 @@ void LPD8806multi::writeLatch() {
 	*portAddrs[0] &= ~clkpinmaskperport[0];
 	*portAddrs[1] |=  clkpinmaskperport[1];
 	*portAddrs[1] &= ~clkpinmaskperport[1];
+#if NSTRIPS>7
+	*portAddrs[2] |=  clkpinmaskperport[2];
+	*portAddrs[2] &= ~clkpinmaskperport[2];
+#endif
     }
 }
 
@@ -148,7 +154,7 @@ void LPD8806multi::show(void) {
 	    p5<<=1;
 	    p6<<=1;
 #if NSTRIPS>7
-	    x=(*portAddrs[2] & ~datapinmaskperport[2]);
+	    uint8_t x=(*portAddrs[2] & ~datapinmaskperport[2]);
 	    if (pptr[160*21] & bit) x |=  datapinmask[7];
 	    *portAddrs[2] =  x;
 	    *portAddrs[2] |= clkpinmaskperport[2];
