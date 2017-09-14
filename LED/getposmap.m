@@ -12,7 +12,7 @@ if vgroup==0
 posmap=[0+(159:-1:0), 160+(159:-1:0),320+(0:159),480+(0:159)];
 % Y,B,M,C
 elseif vgroup==1
-  posmap=0:160*6-1;
+  posmap=0:160*8-1;
   %fprintf('Not mapping IDs\n');
 elseif vgroup==2
   % Map index to left entry group

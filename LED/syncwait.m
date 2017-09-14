@@ -15,7 +15,7 @@ while true
     end
     continue;
   end
- % fprintf('Got 0x%02x\n',resp);
+  %fprintf('Got 0x%02x\n',resp);
   if nread==0
     if resp=='A'
       nread=nread+1;

@@ -13,7 +13,7 @@ if isfield(s1,'socket')
       break;
     end
     np=np+1;
-    pause(0.001);
+    %    pause(0.001);
 %    fprintf('paused\n');
   end
 %  if cnt<n

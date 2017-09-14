@@ -6,7 +6,7 @@ function n=numled(strip)
 %nperstrip=[30,160,160,160,160,29];
 nouter=0;
 %nperstrip=[160,160,160,160];
-nperstrip=[160,160,160,160,160,160];	% 8/23/15 - enable all LEDs 
+nperstrip=[160,160,160,160,160,160,160,160];	% 8/23/15 - enable all LEDs 
 if nargin<1
   n=sum(nperstrip);  % Total number
 elseif strip==0

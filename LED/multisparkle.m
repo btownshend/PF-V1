@@ -30,7 +30,7 @@ while true
     newc=[];
     for i=1:length(curon)
       if rand(1)<poff
-        cmd=[cmd,setled(s1,curon(i),[0,0,0])];
+        cmd=[cmd,setled(s1,curon(i),[0,0,0],1,1)];
       else
         newc=[newc,curon(i)];
       end
@@ -45,7 +45,7 @@ while true
         sel=randi(nled)-1;
         curon=[curon,sel];
         %      cmd=[cmd,setled(s1,sel,cols(randi(size(cols,1)),:))];
-        cmd=[cmd,setled(s1,sel,col)];
+        cmd=[cmd,setled(s1,sel,col,1,1)];
       end
       if (length(curon)>length(newc))
         fprintf('Turned on %d ', length(curon)-length(newc));

@@ -21,7 +21,7 @@ while true
   col=(sin(cphase)+1)/2;
   lev=((amp.*col).^2*.97+.03) * 127;   % Response is nonlinear (approx squared)
   fprintf('t=%.1f, phase=%.0f, amp(1,:)=%.2f %.2f %.2f,lev=%.0f %.0f %.0f\n',t(1,1),phase(1,1)*180/pi,amp(1,:),lev(1,:));
-  setallleds(s1,lev);
+  setallleds(s1,lev,1);
   show(s1,dt);   % Show for dt seconds
   sync(s1);
   t=t+dt;

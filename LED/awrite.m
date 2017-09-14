@@ -1,5 +1,5 @@
 function awrite(s1,cmd)
-maxwrite=1024;
+maxwrite=512;
 if isfield(s1,'socket')
   % Ethernet
   for i=1:maxwrite:length(cmd)
