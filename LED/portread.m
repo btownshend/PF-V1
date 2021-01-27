@@ -13,9 +13,11 @@ if isfield(s1,'socket')
       break;
     end
     np=np+1;
-    %    pause(0.001);
-%    fprintf('paused\n');
+    pause(0.001);
   end
+  %  if np>0
+  %    fprintf('paused %d\n',np);
+  % end
 %  if cnt<n
 %    fprintf('Read %d/%d bytes: %s (0x%s)\n',cnt,n-length(resp), sprintf('%c',char(resp)),sprintf('%02x',resp));
 %  end

@@ -25,7 +25,7 @@ col=[level,0,0];
 while true
   counter=syncsend(s1);   % Send request for sync, check for it after sending a data block
   fprintf('Sent sync req %d\n', counter);
-  for k=1:20
+  for k=1:10
     cmd=[];
     newc=[];
     for i=1:length(curon)
@@ -63,7 +63,9 @@ while true
     col=round(col*level/sum(col));
   end
   fprintf('Wait for sync response %d...',counter);
-  ok=syncwait(s1,counter,3.0);  % Wait 1 second for sync
+  tic
+  ok=syncwait(s1,counter,20.0);  % Wait for sync
+  fprintf('Sync took %.3f seconds\n', toc);
   if ~ok
     fprintf('Failed\n');
     break;

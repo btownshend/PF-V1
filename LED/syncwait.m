@@ -5,6 +5,7 @@ end
 nread=0;
 ok=false;
 timeout=now+maxwait/24/60/60;
+starttime=now;
 
 while true
   [resp,cnt]=portread(s1,1);
@@ -28,6 +29,10 @@ while true
     if resp==counter
       %      fprintf('SYNC OK\n');
       ok=true;
+      stime=(now-starttime)*24*60*60;
+      if stime > 1
+        fprintf('sync took %.2f seconds\n', stime);
+      end
       return;
     end
     fprintf('Mismatched sync: sent %d, got %d\n', counter, resp);

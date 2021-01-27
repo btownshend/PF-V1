@@ -19,6 +19,10 @@ while true
   for k=1:rpt
     awrite(s1,['E',uint8(nsend),uint8(nrddata),uint8(data)]);
     readback=portread(s1,nrddata);
+    if length(readback)~=nrddata
+      fprintf('Expected %d bytes, received %d\n', nrddata, length(readback));
+      continue;
+    end
     ncmp=min(nsend,nrddata);
     mismatch=find(data(1:ncmp)~=readback(1:ncmp));
     if ~isempty(mismatch)
